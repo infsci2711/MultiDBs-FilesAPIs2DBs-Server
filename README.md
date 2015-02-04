@@ -28,4 +28,20 @@ Group meeting:
 3. Project structure done.
 
 Mission 1:
-Use the dataverse API.
+Use the dataverse API. 
+
+Week 2
+
+Group meeting:
+1/31/2015
+1. Project tutorial done.
+2. Project structure introduction done.
+3. Split the project and assign to every group member done.
+
+Mission 1:
+Use the dataverse API. 
+We can now access the dataverse test server by using their api successfully.
+
+Mission 2:
+Access local SPSS files.
+
