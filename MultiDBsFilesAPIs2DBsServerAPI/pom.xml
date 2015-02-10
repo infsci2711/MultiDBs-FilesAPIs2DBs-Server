@@ -68,5 +68,12 @@
 			<version>0.1-SNAPSHOT</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-multipart</artifactId>
+            <version>1.9</version>
+        </dependency>
+
+
 	</dependencies>
 </project>

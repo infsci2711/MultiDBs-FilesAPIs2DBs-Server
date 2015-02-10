@@ -1,18 +1,24 @@
-package edu.pitt.sis.infsci2711.filesapi2dbsserver;
+package edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils;
 
-import com.pmstation.spss.reader.SPSSReader;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.TimeZone;
 
-public class Filesapi2dbsserver {
+import com.pmstation.spss.reader.SPSSReader;
 
-	public static void main(String[] args) {
-		if (!checkOrShowUsage(args))
-			return;
+public class FileReader {
+
+	private String filepath = null;
+	
+	public FileReader(String filepath){
+		this.filepath = filepath;
+	}
+	
+	public boolean readSPSS(){
+		if (!checkOrShowUsage(filepath))
+			return false;
 		try {
 			// All data read as GMT so we'll set default time zone
 			// to suppress output conversion
@@ -22,7 +28,7 @@ public class Filesapi2dbsserver {
 			Date start = new Date();
 
 			// Initializing reader with file path and empty charset
-			SPSSReader reader = new SPSSReader(args[0], null);
+			SPSSReader reader = new SPSSReader(filepath, null);
 			// profiling checkpoint
 			Date parsed = new Date();
 			// Iterate thru variable and print them
@@ -65,16 +71,16 @@ public class Filesapi2dbsserver {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		return true;
 	}
 
 	// /Make Date diff string
 	private static String makeTimeDiffString(Date start, Date finish) {
 		return (finish.getTime() - start.getTime()) + " ms";
 	}
-
 	// /Check params value and prints usage if something wrong.
-	private static boolean checkOrShowUsage(String[] args) {
-		if (args.length != 1 || !new File(args[0]).exists()) {
+	private static boolean checkOrShowUsage(String filepath) {
+		if (filepath == null) {
 			System.out.println("Usage: java Demo2 <existing SPSS file>");
 			return false;
 		} else
