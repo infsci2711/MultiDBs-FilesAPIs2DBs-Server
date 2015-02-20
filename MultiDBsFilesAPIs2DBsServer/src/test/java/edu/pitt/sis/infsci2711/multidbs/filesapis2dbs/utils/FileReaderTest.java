@@ -6,7 +6,7 @@ public class FileReaderTest {
 
 	@Test
 	public void testReadSPSS() {
-		FileReader fileReader = new FileReader("DatasetTest.sav");
+		FileReader fileReader = new FileReader("upload_files/DatasetTest.sav");
 		Boolean result = fileReader.readSPSS();
 	    //assertEquals(true, result);
 	}
