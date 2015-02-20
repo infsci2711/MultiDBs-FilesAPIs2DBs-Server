@@ -5,12 +5,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.JdbcUtil1;
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.JdbcUtil;
 
 public class SpssDAO {
 public static boolean createTable(ArrayList<String> t) throws SQLException, Exception {
 		
-		try (Connection connection = JdbcUtil1.getConnection()) {
+		try (Connection connection = JdbcUtil.getConnection()) {
 			
 			String sql="create table "+t.get(0)+"( ";
 			for(int i=1;i<t.size();i++){
