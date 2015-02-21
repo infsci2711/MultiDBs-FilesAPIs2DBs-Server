@@ -16,5 +16,9 @@ public class Filesapi2dbsserver {
 		if(f==true){
 			System.out.println("success!");
 		}
+		
+		FileTuples file = new FileTuples("upload_files/DatasetTest.sav");
+		int res = s.add(file);
+		System.out.println(res);
 }
 }
