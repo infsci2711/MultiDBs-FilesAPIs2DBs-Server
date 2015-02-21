@@ -18,8 +18,8 @@ public class FileTuples {
 		this.filepath = filepath;
 	}
 	
-	public ArrayList<ArrayList<Object>> addTuples(){
-		ArrayList<ArrayList<Object>> rows = new ArrayList<ArrayList<Object>>();
+	public ArrayList<ArrayList<String>> addTuples(){
+		ArrayList<ArrayList<String>> rows = new ArrayList<ArrayList<String>>();
 		
 		try {
 			// All data read as GMT so we'll set default time zone
@@ -46,7 +46,7 @@ public class FileTuples {
 			
 			int row = 0;
 			while (reader.read()) {
-				ArrayList<Object> tuples = new ArrayList<Object>();
+				ArrayList<String> tuples = new ArrayList<String>();
 				// cycling thru variables to get corresponding values
 				for (int i = 0; i < reader.getVariables().size(); i++) {
 					// get current row variable value
@@ -55,15 +55,15 @@ public class FileTuples {
 					// print result to System.out
 					if (res instanceof String) {
 						System.out.print(((String) res).trim() + " ");
-						tuples.add(res);
+						tuples.add(res.toString());
 					} else if (res instanceof Date) {
 						SimpleDateFormat sdf = new SimpleDateFormat(
 								"yyyy.MM.dd HH:mm:ss Z");
 						System.out.print(sdf.format(res) + " ");
-						tuples.add(res);
+						tuples.add(res.toString());
 					} else{
 						System.out.print(res + " ");
-						tuples.add(res);
+						tuples.add(res.toString());
 					}
 				}
 				System.out.println();
@@ -71,13 +71,6 @@ public class FileTuples {
 				row++;
 			}
 			
-//		for(int i = 0; i < rows.size(); i++){
-//				for(Object o : rows.get(i)){
-//					System.out.print("*" + o + " ");
-//				}
-//				System.out.println();
-//		}
-//			
 			
 			// profiling checkpoint
 			Date finish = new Date();
