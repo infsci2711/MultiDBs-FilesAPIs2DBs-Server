@@ -20,8 +20,8 @@ public class SpssService {
 	public int add(final FileTuples file) throws SQLException, Exception {
 		
 		String fileName = file.getFilepath();
-		int dot = fileName.indexOf(".");
-		String tableName = fileName.substring(0, dot);
+		String tableName= fileName.replace(".sav", "");
+		tableName= fileName.replace("upload_files/", "");
 		
 		int res = spssDAO.save(tableName, file.addTuples());
 		

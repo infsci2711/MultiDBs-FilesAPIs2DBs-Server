@@ -40,6 +40,7 @@ public class FileReader1 {
 			//Iterator it = reader.getVariables().iterator();
 			Vector  var=reader.getVariables();
 			String sf= filepath.replace(".sav", "");
+			sf= filepath.replace("upload_files/", "");
 			tableList.add(sf);
 			for(int j=0;j<var.size();j++){
 				System.out.println(var.get(j));
