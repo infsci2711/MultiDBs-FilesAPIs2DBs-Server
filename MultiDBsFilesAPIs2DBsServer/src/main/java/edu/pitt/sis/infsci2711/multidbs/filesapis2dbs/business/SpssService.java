@@ -8,23 +8,24 @@ import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.dao.SpssDAO;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.models.PersonDBModel;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileTuples;
 
-
 public class SpssService {
 	SpssDAO spssDAO;
-	public boolean createTable(ArrayList<String> t)throws SQLException, Exception{
+
+	public boolean createTable(ArrayList<String> t) throws SQLException,
+			Exception {
 		spssDAO = new SpssDAO();
-		boolean flag=spssDAO.createTable(t);
+		boolean flag = spssDAO.createTable(t);
 		return flag;
 	}
-	
+
 	public int add(final FileTuples file) throws SQLException, Exception {
-		
+
 		String fileName = file.getFilepath();
-		String tableName= fileName.replace(".sav", "");
-		tableName= fileName.replace("upload_files/", "");
-		
+		String tableName = fileName.replace(".sav", "");
+		tableName = tableName.replace("upload_files/", "");
+
 		int res = spssDAO.save(tableName, file.addTuples());
-		
+
 		return res;
 	}
 }
