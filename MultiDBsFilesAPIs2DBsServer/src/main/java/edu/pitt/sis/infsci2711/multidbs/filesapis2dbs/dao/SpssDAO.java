@@ -12,7 +12,7 @@ public static boolean createTable(ArrayList<String> t) throws SQLException, Exce
 		
 		try (Connection connection = JdbcUtil1.getConnection()) {
 			
-			String sql="create table "+t.get(0)+"( ";
+			String sql="create table if not exists"+t.get(0)+"( ";
 			for(int i=1;i<t.size();i++){
 				sql=sql+" "+t.get(i)+" ";
 				i++;
