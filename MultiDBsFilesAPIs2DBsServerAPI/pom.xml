@@ -68,12 +68,18 @@
 			<version>0.1-SNAPSHOT</version>
 		</dependency>
 
-		<dependency>
+		 <dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-multipart</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+
+		<!-- <dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
             <artifactId>jersey-multipart</artifactId>
             <version>1.9</version>
         </dependency>
-
+-->
 
 	</dependencies>
 </project>
