@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -16,6 +18,10 @@ import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.SpssService;
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileReader2;
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileTuples;
 
 @Path("Filesapis2db/")
 public class Filesapis2dbRestApi {
@@ -34,7 +40,7 @@ public class Filesapis2dbRestApi {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response uploadFile(
 			@FormDataParam("file") InputStream uploadedInputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail) {
+			@FormDataParam("file") FormDataContentDisposition fileDetail) throws SQLException, Exception {
 	 
 			String uploadedFileLocation = "upload/" + fileDetail.getFileName();
 	 
@@ -42,6 +48,19 @@ public class Filesapis2dbRestApi {
 			writeToFile(uploadedInputStream, uploadedFileLocation);
 	 
 			String output = "File uploaded to : " + uploadedFileLocation;
+			
+			FileReader2 fileReader1 = new FileReader2(
+					uploadedFileLocation);
+			ArrayList<String> t = fileReader1.readSPSSCreat();
+			SpssService s = new SpssService();
+			boolean f = s.createTable(t);
+			if (f == true) {
+				System.out.println("success!");
+			}
+
+			FileTuples file = new FileTuples(uploadedFileLocation);
+			int res = s.add(file);
+			System.out.println(res);
 	 
 			return Response.status(200).entity(output).build();
 	 
