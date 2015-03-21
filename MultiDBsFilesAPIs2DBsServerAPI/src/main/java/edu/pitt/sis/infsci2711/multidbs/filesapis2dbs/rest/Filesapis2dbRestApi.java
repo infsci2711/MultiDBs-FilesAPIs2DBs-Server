@@ -40,7 +40,7 @@ public class Filesapis2dbRestApi {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response uploadFile(
 			@FormDataParam("file") InputStream uploadedInputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail) throws SQLException, Exception {
+			@FormDataParam("file") FormDataContentDisposition fileDetail){
 	 
 			String uploadedFileLocation = "upload/" + fileDetail.getFileName();
 	 
@@ -49,19 +49,24 @@ public class Filesapis2dbRestApi {
 	 
 			String output = "File uploaded to : " + uploadedFileLocation;
 			
-			FileReader2 fileReader = new FileReader2(
-					uploadedFileLocation);
-			ArrayList<String> t = fileReader.readSPSSCreat();
-			SpssService s = new SpssService();
-			boolean f = s.createTable(t);
-			if (f == true) {
-				System.out.println("success!");
-			}
+//			FileReader2 fileReader = new FileReader2(
+//					uploadedFileLocation);
+//			ArrayList<String> t = fileReader.readSPSSCreat();
+//			SpssService s = new SpssService();
+//			boolean f = false;
+//			try {
+//				f = s.createTable(t);
+//				FileTuples file = new FileTuples(uploadedFileLocation);
+//				int res = s.add(file);
+//				System.out.println(res);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			if (f == true) {
+//				System.out.println("success!");
+//			}
 
-			FileTuples file = new FileTuples(uploadedFileLocation);
-			int res = s.add(file);
-			System.out.println(res);
-	 
 			return Response.status(200).entity(output).build();
 	 
 		}
