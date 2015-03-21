@@ -36,7 +36,7 @@
          <artifactId>SPSSReader</artifactId>
          <scope>system</scope>
          <version>1.0</version>
-         <systemPath>${basedir}\src\main\resources\libs\spssr-1.11.jar</systemPath>
+         <systemPath>${basedir}/src/main/resources/libs/spssr-1.11.jar</systemPath>
       </dependency>
 
 	</dependencies>
