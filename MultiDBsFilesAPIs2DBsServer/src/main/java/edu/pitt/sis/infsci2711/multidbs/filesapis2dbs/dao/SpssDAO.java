@@ -1,16 +1,11 @@
 package edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.dao;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.models.PersonDBModel;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.JdbcUtil;
-import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.JdbcUtil1;
 
 public class SpssDAO {
 
