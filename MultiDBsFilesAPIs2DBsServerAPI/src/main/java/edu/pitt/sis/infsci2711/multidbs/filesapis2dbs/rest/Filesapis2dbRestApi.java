@@ -46,8 +46,6 @@ public class Filesapis2dbRestApi {
 	 
 			// save it
 			writeToFile(uploadedInputStream, uploadedFileLocation);
-	 
-			uploadedFileLocation = "/opt/project/deployed/" + uploadedFileLocation;
 			
 			String output = "File uploaded to : " + uploadedFileLocation;
 			System.out.println(output);
