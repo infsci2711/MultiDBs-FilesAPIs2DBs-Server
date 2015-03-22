@@ -40,7 +40,7 @@ public class Filesapis2dbRestApi {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response uploadFile(
 			@FormDataParam("file") InputStream uploadedInputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail) throws SQLException, Exception {
+			@FormDataParam("file") FormDataContentDisposition fileDetail){
 	 
 			String uploadedFileLocation = "upload"+ File.separatorChar + fileDetail.getFileName();
 	 
@@ -48,20 +48,25 @@ public class Filesapis2dbRestApi {
 			writeToFile(uploadedInputStream, uploadedFileLocation);
 	 
 			String output = "File uploaded to : " + uploadedFileLocation;
-			
-//			FileReader2 fileReader = new FileReader2(
-//					uploadedFileLocation);
-//			ArrayList<String> t = fileReader.readSPSSCreat();
-//			SpssService s = new SpssService();
-//			boolean f = s.createTable(t);
-//			if (f == true) {
-//				System.out.println("success!");
-//			}
-//
-//			FileTuples file = new FileTuples(uploadedFileLocation);
-//			int res = s.add(file);
-//			System.out.println(res);
-//	 
+
+			FileReader2 fileReader = new FileReader2(
+					uploadedFileLocation);
+			ArrayList<String> t = fileReader.readSPSSCreat();
+			SpssService s = new SpssService();
+			boolean f = false;
+			try {
+				f = s.createTable(t);
+				FileTuples file = new FileTuples(uploadedFileLocation);
+				int res = s.add(file);
+				System.out.println(res);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (f == true) {
+				System.out.println("success!");
+			}
+
 			return Response.status(200).entity(output).build();
 	 
 		}
@@ -69,17 +74,14 @@ public class Filesapis2dbRestApi {
 		// save uploaded file to new location
 		private void writeToFile(InputStream uploadedInputStream,
 			String uploadedFileLocation) {
-	 
+			
 			File fileToSaveFile = new File(uploadedFileLocation);
-			
-			System.out.println("Location of the upload file: " + 
-			fileToSaveFile.getAbsolutePath());
-			
+			System.out.println("Location of the upload file:" + fileToSaveFile.getAbsolutePath());
+	 
 			try (OutputStream out = new FileOutputStream(fileToSaveFile)) {
 				
 				int read = 0;
 				byte[] bytes = new byte[1024];
-	 			
 				while ((read = uploadedInputStream.read(bytes)) != -1) {
 					out.write(bytes, 0, read);
 				}
