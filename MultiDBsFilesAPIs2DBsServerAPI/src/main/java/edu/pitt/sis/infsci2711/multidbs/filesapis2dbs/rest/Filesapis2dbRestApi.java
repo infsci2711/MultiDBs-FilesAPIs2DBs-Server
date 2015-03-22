@@ -74,14 +74,15 @@ public class Filesapis2dbRestApi {
 		// save uploaded file to new location
 		private void writeToFile(InputStream uploadedInputStream,
 			String uploadedFileLocation) {
+			
+			File fileToSaveFile = new File(uploadedFileLocation);
+			System.out.println("Location of the upload file:" + fileToSaveFile.getAbsolutePath());
 	 
 			try {
 				OutputStream out = new FileOutputStream(new File(
 						uploadedFileLocation));
 				int read = 0;
 				byte[] bytes = new byte[1024];
-	 
-				out = new FileOutputStream(new File(uploadedFileLocation));
 				while ((read = uploadedInputStream.read(bytes)) != -1) {
 					out.write(bytes, 0, read);
 				}
