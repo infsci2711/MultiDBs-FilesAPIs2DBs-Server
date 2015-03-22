@@ -42,7 +42,7 @@ public class Filesapis2dbRestApi {
 			@FormDataParam("file") InputStream uploadedInputStream,
 			@FormDataParam("file") FormDataContentDisposition fileDetail) throws SQLException, Exception {
 	 
-			String uploadedFileLocation = "upload/" + fileDetail.getFileName();
+			String uploadedFileLocation = "upload"+ File.separatorChar + fileDetail.getFileName();
 	 
 			// save it
 			writeToFile(uploadedInputStream, uploadedFileLocation);
