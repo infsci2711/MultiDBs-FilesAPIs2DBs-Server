@@ -1,5 +1,6 @@
 package edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class SpssService {
 
 		String fileName = file.getFilepath();
 		String tableName = fileName.replace(".sav", "");
-		tableName = tableName.replace("upload/", "");
+		tableName = tableName.replace("upload" + File.separatorChar, "");
 
 		int res = spssDAO.save(tableName, file.addTuples());
 

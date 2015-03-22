@@ -48,7 +48,7 @@ public class Filesapis2dbRestApi {
 			writeToFile(uploadedInputStream, uploadedFileLocation);
 	 
 			String output = "File uploaded to : " + uploadedFileLocation;
-
+			System.out.println("Location of the upload file:" + output);
 			FileReader2 fileReader = new FileReader2(
 					uploadedFileLocation);
 			ArrayList<String> t = fileReader.readSPSSCreat();
