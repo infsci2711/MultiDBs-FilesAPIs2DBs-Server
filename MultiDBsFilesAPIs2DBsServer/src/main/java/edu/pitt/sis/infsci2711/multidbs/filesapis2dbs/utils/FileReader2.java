@@ -1,6 +1,7 @@
 package edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils;
 
 // http://spss.pmstation.com/spssr_index.jsp
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
@@ -40,7 +41,7 @@ public class FileReader2 {
 			// Iterator it = reader.getVariables().iterator();
 			Vector var = reader.getVariables();
 			String sf = filepath.replace(".sav", "");
-			sf = sf.replace("upload/", "");
+			sf = sf.replace("upload" + File.separatorChar, "");
 			tableList.add(sf);
 			for (int j = 0; j < var.size(); j++) {
 				System.out.println(var.get(j));
