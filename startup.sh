@@ -1,2 +1,2 @@
 #!/bin/bash
-mysql -u student -pinfsci27116 < db_init.sql
+mysql -u root -pinfsci27116 < db_init.sql
