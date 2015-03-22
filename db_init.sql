@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `infsci2711_filesapi2dbs`
+CREATE DATABASE  IF NOT EXISTS `infsci2711_filesapi2dbs`;
 USE `infsci2711_filesapi2dbs`;
 
 
