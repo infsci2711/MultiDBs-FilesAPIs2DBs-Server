@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
@@ -21,7 +20,6 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.SpssService;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileReader2;
-import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileTuples;
 
 
 @Path("Filesapis2db/")
@@ -41,7 +39,7 @@ public class Filesapis2dbRestApi {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response uploadFile(
 			@FormDataParam("file") InputStream uploadedInputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail){
+			@FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException{
 	 
 			String uploadedFileLocation = "upload"+ File.separatorChar + fileDetail.getFileName();
 	 
@@ -50,28 +48,29 @@ public class Filesapis2dbRestApi {
 			
 			String output = "File uploaded to : " + uploadedFileLocation;
 			System.out.println(output);
+			System.out.println("hello!");
+			create(uploadedFileLocation);  //create table and tuples
 			
-			
-			FileReader2 fileReader = new FileReader2(
-					uploadedFileLocation);
+			return Response.status(200).entity(output).build();
+	 
+		}
+	
+		private  void  create(String uploadedFileLocation) throws IOException{
+			FileReader2 fileReader = new FileReader2(uploadedFileLocation);
 			ArrayList<String> t = fileReader.readSPSSCreat();
 			SpssService s = new SpssService();
-			boolean f = false;
+			boolean flag=false;
 			try {
-				f = s.createTable(t);
-				FileTuples file = new FileTuples(uploadedFileLocation);
-				int res = s.add(file);
-				System.out.println(res);
+				flag=s.createTable(t);
+				 s.add(fileReader);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				if(flag==true){
+					System.out.println("success!");
+				}
 			}
-			if (f == true) {
-				System.out.println("success!");
-			}
-
-			return Response.status(200).entity(output).build();
-	 
+			
 		}
 	 
 		// save uploaded file to new location

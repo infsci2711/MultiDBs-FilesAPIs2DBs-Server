@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.JdbcUtil;
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.JdbcUtil1;
 
 public class SpssDAO {
 
@@ -14,7 +15,7 @@ public class SpssDAO {
 	public boolean createTable(ArrayList<String> t) throws SQLException,
 			Exception {
 
-		try (Connection connection = JdbcUtil.getConnection()) {
+		try (Connection connection = JdbcUtil1.getConnection()) {
 
 			String sql = "create table if not exists " + t.get(0) + "( ";
 			for (int i = 1; i < t.size(); i++) {

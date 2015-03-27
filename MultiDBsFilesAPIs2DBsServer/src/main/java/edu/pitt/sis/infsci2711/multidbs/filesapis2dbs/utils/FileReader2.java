@@ -2,6 +2,8 @@ package edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils;
 
 // http://spss.pmstation.com/spssr_index.jsp
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
@@ -15,9 +17,11 @@ import com.pmstation.spss.variable.StringVariable;
 public class FileReader2 {
 
 	private String filepath = null;
+	private SPSSReader reader;
 
-	public FileReader2(String filepath) {
+	public FileReader2(String filepath) throws IOException {
 		this.filepath = filepath;
+		reader = new SPSSReader(filepath, null);
 	}
 
 	public ArrayList<String> readSPSSCreat() {
@@ -33,7 +37,7 @@ public class FileReader2 {
 			Date start = new Date();
 
 			// Initializing reader with file path and empty charset
-			SPSSReader reader = new SPSSReader(filepath, null);
+		
 			// profiling checkpoint
 			Date parsed = new Date();
 			// Iterate thru variable and print them
@@ -44,7 +48,6 @@ public class FileReader2 {
 			sf = sf.replace("upload" + File.separatorChar, "");
 			tableList.add(sf);
 			for (int j = 0; j < var.size(); j++) {
-				System.out.println(var.get(j));
 				String s;
 				String[] a;
 				if (var.get(j) instanceof StringVariable) {
@@ -68,7 +71,6 @@ public class FileReader2 {
 					a[1] = a[1].replace("|", "");
 					a[1] = a[1].replace("{", "");
 					a[1] = a[1].replace("}", "");
-
 					tableList.add(a[1]);
 					tableList.add("varchar");
 				} else {
@@ -91,5 +93,54 @@ public class FileReader2 {
 		}
 		return tableList;
 	}
+	
+	public ArrayList<ArrayList<String>> addTuples(){
+		ArrayList<ArrayList<String>> rows = new ArrayList<ArrayList<String>>();
+		
+		try {
+			
+			int row = 0;
+			while (reader.read()) {
+				ArrayList<String> tuples = new ArrayList<String>();
+				// cycling thru variables to get corresponding values
+				for (int i = 0; i < reader.getVariables().size(); i++) {
+					// get current row variable value
+					Object res = reader.getValue(i);
+	                
+					// print result to System.out
+					if (res instanceof String) {
+						System.out.print(((String) res).trim() + " ");
+						tuples.add(res.toString());
+					} else if (res instanceof Date) {
+						SimpleDateFormat sdf = new SimpleDateFormat(
+								"yyyy.MM.dd HH:mm:ss Z");
+						System.out.print(sdf.format(res) + " ");
+						tuples.add(res.toString());
+					} else{
+						System.out.print(res + " ");
+						tuples.add(res.toString());
+					}
+				}
+				System.out.println();
+				rows.add(tuples);
+				row++;
+			}
+			
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return rows;
+		
+	}
+	public String getFilepath() {
+		return filepath;
+	}
+
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
+
 
 }
