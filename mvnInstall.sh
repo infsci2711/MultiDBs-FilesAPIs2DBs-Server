@@ -18,4 +18,7 @@ cd /opt/project/deployed
 kill -9 $(lsof -t -i:7654)
 cd /opt/project/deployed
 java -jar multidbsfilesapis2dbsserverapi-0.1-SNAPSHOT.jar > log.out 2> error.log < /dev/null &
-
+mysql -u dataverse -pdataverse
+show databases;
+use infsci2711_filesapi2dbs;
+show tables;
