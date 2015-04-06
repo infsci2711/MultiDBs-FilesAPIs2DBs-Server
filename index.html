@@ -17,14 +17,9 @@
     <div class="wrapper">
       <header>
         <h1 class="header">Multidbs-filesapis2dbs-server</h1>
-        <p class="header">Ingest data from files and apis to dbs</p>
-
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/infsci2711/MultiDBs-FilesAPIs2DBs-Server/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/infsci2711/MultiDBs-FilesAPIs2DBs-Server/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/infsci2711/MultiDBs-FilesAPIs2DBs-Server">View On GitHub</a></li>
-        </ul>
-
+        <p class="header"><a class="header name" href="index.html">Home</a></p>
+        <p class ="header"><a class="header name" href="description.html">Detailed Description</a></p>
+        <p class="header"><a class="header name" href="api.html">REST API documentations</a></p>
         <p class="header">This project is maintained by <a class="header name" href="https://github.com/infsci2711">infsci2711</a></p>
 
 
@@ -33,51 +28,23 @@
         <h1>
 <a id="multidbs-filesapis2dbs-server" class="anchor" href="#multidbs-filesapis2dbs-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>MultiDBs-FilesAPIs2DBs-Server</h1>
 
-<p>Ingest data from files and apis to dbs</p>
+<p><a href="http://52.0.188.59/">Our webpage</a></p>
 
-<p>INFSCI2711 Term Project
-Files&amp;APIs2DBs</p>
 
-<p>Group Members:
-Weichuan Hong
-Wei Dai
-Shanqi Jiang
-Chang Liu
-Chenyi Wang</p>
+<p>The main purpose of this project is ingesting datasets from SSPS file locally or from Dataverse API and then registered the ingested datasets as new datasources.</p>
 
-<p>Ingest data from different files/API format to a relational databases and expose those databases as data source that can be registered in the MetaStore
-SPSS
-Dataverse Network API
-Web ui 
-to import files
-to register data source in MetaStore
-RESTful API</p>
+<p>By uploading the SSPS file locally, our APIs will transfer the file to the ubuntu server wait for further request. Our API then uses SSPS reader to translate to string type arraylist. Our API will recognize the table name, table properties and content after the tanslation. The API create a new table in our database from Ubuntu to store the structured managed dataset. The API also read the stored table from our database and reflect the result to the user that remind the user the process is success.</p>
 
-<p>Week 1</p>
+<p>Our API uses same process to manage the SSPS file when ingesting datasets from Dataverse. The different is we request the SSPS file from the dataverse instead of uploading locally. By using the dataset identifier, the API will find the selected source from the Dataverse and upload the file to our Ubuntu server. </p>
 
-<p>Group meeting:
-1/25/2015
-1. Github Project installed to everyone's computer.
-2. Test Case structure done.
-3. Project structure done.</p>
 
-<p>Mission 1:
-Use the dataverse API. </p>
+<p>Group Members:<br>
+Weichuan Hong - lockTP<br>
+Chenyi Wang - chw120<br>
+Shanqi Jiang - jpotato0o<br>
+Chang Liu - MooninSun<br>
+Wei Dai - wed26</p>
 
-<p>Week 2</p>
-
-<p>Group meeting:
-1/31/2015
-1. Project tutorial done.
-2. Project structure introduction done.
-3. Split the project and assign to every group member done.</p>
-
-<p>Mission 1:
-Use the dataverse API. 
-We can now access the dataverse test server by using their api successfully.</p>
-
-<p>Mission 2:
-Access local SPSS files.</p>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
