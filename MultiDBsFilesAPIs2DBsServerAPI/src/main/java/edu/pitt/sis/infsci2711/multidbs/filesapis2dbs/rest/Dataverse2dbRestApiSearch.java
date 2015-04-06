@@ -27,9 +27,7 @@ public class Dataverse2dbRestApiSearch<JSONObject> {
 	@Path("{file_name}")
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
-	public Response dataverseById(@PathParam("file_name") final int file_name) {
-		
-	//	int idFake = 19;
+	public org.json.JSONObject dataverseByName(@PathParam("file_name") final String file_name) {
 		
 		//Sent rest api by file_name = trees
 		
@@ -37,7 +35,7 @@ public class Dataverse2dbRestApiSearch<JSONObject> {
 		
 		Client c = ClientBuilder.newClient();
 		
-		String url = "https://apitest.dataverse.org/api/search?q=" + file_name + "&key=70fd9725-ce99-45cd-b38e-bbb4d7e2464e";
+		String url = "https://apitest.dataverse.org/api/search?q=" + file_name + "&key=a23d0453-a1f7-4e02-a5f4-eed75946e2a2";
 		
         WebTarget target = c.target(UriBuilder.fromUri(url).build());
 //        String responseMsg = target.path("rest").path("test").request().get(String.class);
@@ -53,9 +51,10 @@ public class Dataverse2dbRestApiSearch<JSONObject> {
         	line = "{\"file_id\": \"" + file.getString("file_id") + "\"}";
         }
        }
-       // System.out.println(line);
-		
-		return Response.status(200).entity(line).build();
+       
+       org.json.JSONObject id = new org.json.JSONObject(line);
+
+		return id;
 		
 	}
 }

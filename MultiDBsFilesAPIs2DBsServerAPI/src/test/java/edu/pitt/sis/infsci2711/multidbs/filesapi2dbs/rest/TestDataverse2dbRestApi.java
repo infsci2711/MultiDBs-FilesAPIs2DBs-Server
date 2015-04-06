@@ -11,7 +11,7 @@ public class TestDataverse2dbRestApi {
 	@Test
 	public void TestDataverseById() {
 		Dataverse2dbRestApiSearch<?> dataverse2dbRestApiSearch = new Dataverse2dbRestApiSearch<Object>();
-		dataverse2dbRestApiSearch.dataverseById(19);
+		System.out.print(dataverse2dbRestApiSearch.dataverseByName("trees"));
 		assertEquals(1, 1);
 	}
 
