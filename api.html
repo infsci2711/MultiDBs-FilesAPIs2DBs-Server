@@ -28,24 +28,37 @@
         <h1>
 <a id="multidbs-filesapis2dbs-server" class="anchor" href="#multidbs-filesapis2dbs-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>MultiDBs-FilesAPIs2DBs-Server</h1>
 
-<p><a href="http://52.0.188.59/">Our webpage</a></p>
+<p>Our project contains four main REST APIs.</p>
 
-<p>Ingest data from files and apis to dbs</p>
-
-<p>INFSCI2711 Term Project
-Files&amp;APIs2DBs</p>
-
-
-
-<p>Ingest data from different files/API format to a relational databases and expose those databases as data source that can be registered in the MetaStore SPSS Dataverse Network API Web ui  to import files to register data source in MetaStore RESTful API.</p>
+<p>API of converting SPSS file. <br>
+  -Upload SPSS file, converting SPSS file to SQL query, create new talbe in database and store the data. <br>
+  -Method: post<br>
+  -Input Param: SPSS file<br>
+  -Output Param: SQL query<p>
 
 
-<p>Group Members:
-Weichuan Hong
-Wei Dai
-Shanqi Jiang
-Chang Liu
-Chenyi Wang</p>
+  <p>API of reading from database<br>
+    -Read from selected table in the database and showing the content in this table on a html page.<br>
+    -Method: post<br>
+    -Input Param: None<br>
+    -Output Param: SQL query</p>
+
+
+    <p>API of request the meta data of dataset in Dataverse<br>
+    -Search for a full name of a dataset in Dataverse, request the meta data of this dataset by using RESTful service and select the ID of this dataset.<br>
+    -Method: post<br>
+    -Input Param: Name of the dataset<br>
+    -Output Param: meta data in json format 
+    </p>
+
+
+    <p>API of request the file in the Dataverse<br>
+    -Using the ID of the dataset in the Dataverse to download the desired file and upload the file to the server.<br>
+    -Method: post<br>
+    -Input Param: ID of the dataset<br>
+    -Output Param: None</p>
+
+
 
       </section>
       <footer>

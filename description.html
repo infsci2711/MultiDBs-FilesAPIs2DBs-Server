@@ -28,24 +28,22 @@
         <h1>
 <a id="multidbs-filesapis2dbs-server" class="anchor" href="#multidbs-filesapis2dbs-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>MultiDBs-FilesAPIs2DBs-Server</h1>
 
-<p><a href="http://52.0.188.59/">Our webpage</a></p>
+<p>Generally, our project has three parts, the front end, Dataverse interface and the back end.</p>
 
-<p>Ingest data from files and apis to dbs</p>
+<p>The front end is basicly a html page. The html page allows user to upload a SPSS file by form or request a SPSS file from Dataverse. The front end will post the uploaded file to Ubuntu server. </p>
 
-<p>INFSCI2711 Term Project
-Files&amp;APIs2DBs</p>
+<p>When the user request a file from the Dataverse, our API will post the name of the requested dataset to the Dataverse. Dataverse will generate a URL as a return that our API can use RESTful to get the meta data of the requested dataset. The meta data we needed is the ID of the dataset. Our API will read the ID and make a new request to the Dataverse using this ID. By submittin this ID, Dataverse will return the desired file to our API and the API will uploaded the file to the Ubuntu server to wait for next command. </p>
 
+<p>The back end is the file handling part. Firstly, the SPSS reader in the back end will parse the file to an arraylist and recognize the form name, row name and the column name. In order to make sure all data is store correctly, we store all data as string. Our file reader will re-build the dataset that putting every data in right format. And the API will patch up a SQL to create a new table and record the data in our database in Ubuntu server base on the disposed data.</p>
 
+<p>Due to limitation of time, our project only have handle SPSS file at this time. But it has the potential of reading all file types and store the data to the database. </p>
 
-<p>Ingest data from different files/API format to a relational databases and expose those databases as data source that can be registered in the MetaStore SPSS Dataverse Network API Web ui  to import files to register data source in MetaStore RESTful API.</p>
+<p>Any other group which need convert a SPSS file to readable data in server can use our API. Or any user wants to request data from Dataverse is highly recommanded to use our API. </p>
 
+<p>To start our project, developers need an account of Ubuntu server and knowledge of request to RESTful web service that can communicate with Dataverse. </p>
 
-<p>Group Members:
-Weichuan Hong
-Wei Dai
-Shanqi Jiang
-Chang Liu
-Chenyi Wang</p>
+<p>Any updates in our project need to use the mvnInstall.sh script in the MultiDBsFilesAPIs2DBsServerAPI/target. Just simply cd to the location and use sh mvnInshall.sh command to run the script. From the fresh installation, user need to run the startup.sh script in the same directory to initialize the Ubuntu server.</p>
+
 
       </section>
       <footer>
