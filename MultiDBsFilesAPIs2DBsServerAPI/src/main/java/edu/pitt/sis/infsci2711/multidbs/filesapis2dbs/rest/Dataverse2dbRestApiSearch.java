@@ -35,7 +35,7 @@ public class Dataverse2dbRestApiSearch<JSONObject> {
 		
 		Client c = ClientBuilder.newClient();
 		
-		String url = "https://apitest.dataverse.org/api/search?q=" + file_name + "&key=a23d0453-a1f7-4e02-a5f4-eed75946e2a2";
+		String url = "https://apitest.dataverse.org/api/search?q=" + file_name + "&key=8bd9250c-a490-4ff9-95d0-5b6af3b2bf05";
 		
         WebTarget target = c.target(UriBuilder.fromUri(url).build());
 //        String responseMsg = target.path("rest").path("test").request().get(String.class);
