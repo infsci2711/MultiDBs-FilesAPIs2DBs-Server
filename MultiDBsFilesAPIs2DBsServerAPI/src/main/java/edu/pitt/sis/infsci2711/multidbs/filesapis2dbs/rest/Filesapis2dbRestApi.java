@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
@@ -14,6 +16,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -48,10 +51,17 @@ public class Filesapis2dbRestApi {
 			
 			String output = "File uploaded to : " + uploadedFileLocation;
 			System.out.println(output);
-			System.out.println("hello!");
 			create(uploadedFileLocation);  //create table and tuples
 			
 			return Response.status(200).entity(output).build();
+//			URI uri = null;
+//			try {
+//				uri = new URI("http://localhost:8080/MultiDBs-FilesAPIs2DBs-WebClient/tutorial.html");
+//			} catch (URISyntaxException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			return Response.temporaryRedirect(uri).build();
 	 
 		}
 	

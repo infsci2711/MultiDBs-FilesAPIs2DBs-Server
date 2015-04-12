@@ -25,56 +25,75 @@ import javax.ws.rs.core.UriBuilder;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.SpssService;
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileReader2;
+
 @Path("dataverse/")
 public class Dataverse2dbRestApi<GetMethod> {
 
-	@Path("{id}")
-	@GET
-    @Produces(MediaType.APPLICATION_JSON)
-	public Response dataverseById(@PathParam("id") final int id,@PathParam("name") final String name) {
-		
-		String idString =String.valueOf(id);
-		
-		//Sent rest api by id
-		
-		//binary inputstream -> save to upload
-		
-		Client c = ClientBuilder.newClient();
-		WebTarget target = c.target(UriBuilder.fromUri("https://apitest.dataverse.org/api/access/datafile"+ File.separatorChar + idString).build());
-//		WebTarget target = c.target(UriBuilder.fromUri("https://apitest.dataverse.org/api/dataverses/db?key=d0eeea84-b226-4f26-9ea6-67eae6247ff5").build());
-//      String responseMsg = target.path("rest").path("test").request().get(String.class);
-        InputStream responseMsg = target.request().get(InputStream.class);
-//        System.out.println(responseMsg);
-       
-        String uploadedFileLocation = "download"+ File.separatorChar + name;
-   	 
-		// save it
-		writeToFile(responseMsg, uploadedFileLocation);
-		
-        return Response.status(200).entity("{\"msg\" : \"Download Success\"}").build();
-	}
-	
-	private void writeToFile(InputStream uploadedInputStream,
-			String uploadedFileLocation) {
-			
-			File fileToSaveFile = new File(uploadedFileLocation);
-			System.out.println("Location of the upload file:" + fileToSaveFile.getAbsolutePath());
-	 
-			try (OutputStream out = new FileOutputStream(fileToSaveFile)) {
-				
-				int read = 0;
-				byte[] bytes = new byte[1024];
-				while ((read = uploadedInputStream.read(bytes)) != -1) {
-					out.write(bytes, 0, read);
-				}
-				out.flush();
-				
-			} catch (IOException e) {
-	 
-				e.printStackTrace();
-			}
-	 
-		}
+//	@Path("{id}")
+//	@GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//	public Response dataverseById(@PathParam("id") final int id,@PathParam("name") final String name) throws IOException {
+//		
+//		String idString =String.valueOf(id);
+//		
+//		//Sent rest api by id
+//		
+//		//binary inputstream -> save to upload
+//		
+//		Client c = ClientBuilder.newClient();
+//		WebTarget target = c.target(UriBuilder.fromUri("https://apitest.dataverse.org/api/access/datafile/" + idString + "?format=original").build());
+////		WebTarget target = c.target(UriBuilder.fromUri("https://apitest.dataverse.org/api/dataverses/db?key=d0eeea84-b226-4f26-9ea6-67eae6247ff5").build());
+////      String responseMsg = target.path("rest").path("test").request().get(String.class);
+//        InputStream responseMsg = target.request().get(InputStream.class);
+////        System.out.println(responseMsg);
+//       
+//        String uploadedFileLocation = "upload"+ File.separatorChar + name;
+//   	 
+//		// save it
+//		writeToFile(responseMsg, uploadedFileLocation);
+//		
+//		FileReader2 fileReader = new FileReader2("upload"+ File.separatorChar + name);
+//		ArrayList<String> t = fileReader.readSPSSCreat();
+//		SpssService s = new SpssService();
+//		boolean flag = false;
+//		try {
+//			flag=s.createTable(t);
+//			 s.add(fileReader);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			if(flag==true){
+//				System.out.println("success!");
+//			}
+//		}
+//		
+//		
+//        return Response.status(200).entity("{\"msg\" : \"Download Success\"}").build();
+//	}
+//	
+//	private void writeToFile(InputStream uploadedInputStream,
+//			String uploadedFileLocation) {
+//			
+//			File fileToSaveFile = new File(uploadedFileLocation);
+//			System.out.println("Location of the upload file:" + fileToSaveFile.getAbsolutePath());
+//	 
+//			try (OutputStream out = new FileOutputStream(fileToSaveFile)) {
+//				
+//				int read = 0;
+//				byte[] bytes = new byte[1024];
+//				while ((read = uploadedInputStream.read(bytes)) != -1) {
+//					out.write(bytes, 0, read);
+//				}
+//				out.flush();
+//				
+//			} catch (IOException e) {
+//	 
+//				e.printStackTrace();
+//			}
+//	 
+//		}
 	
 		
 		
