@@ -13,6 +13,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -21,6 +22,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.DataverseService;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.SpssService;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileReader2;
 
@@ -34,6 +36,35 @@ public class Filesapis2dbRestApi {
 	public Response helloWorld() {
 		return Response.status(200)
 				.entity("{\"msg\" : \"Hello Filesapis2db\"}").build();
+	}
+	
+	@Path("dataverseName/Hello/Hello")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response dataverseDownloadHello(){
+		return Response.status(200).entity("{\"msg\" : \"Hello DataverseDownload\"}").build();
+		
+	}
+	
+	@Path("dataverseName/{name}")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response dataverseDownload(@PathParam("name") final String name){
+		boolean result = false;
+		DataverseService dataverSerivce = new DataverseService();
+		int spss_id = dataverSerivce.dataverseByName(name);
+//		int spss_id = Integer.parseInt(name);
+		try {
+			result = dataverSerivce.dataverseById(spss_id, name + ".sav");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(result == true){
+			return Response.status(200).entity("{\"msg\" : \"Download Success\"}").build();
+		}else{
+			return Response.status(200).entity("{\"msg\" : \"Download Fail\"}").build();
+		}
 	}
 
 
