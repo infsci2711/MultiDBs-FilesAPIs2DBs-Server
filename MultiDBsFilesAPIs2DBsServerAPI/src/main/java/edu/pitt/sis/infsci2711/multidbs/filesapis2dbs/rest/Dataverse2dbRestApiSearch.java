@@ -84,5 +84,13 @@ public class Dataverse2dbRestApiSearch<JSONObject> {
 			return Response.status(200).entity("{\"msg\" : \"Download Fail\"}").build();
 		}
 	}
+	
+	@Path("dataverseName/Hello")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response dataverseDownloadHello(){
+		return Response.status(200).entity("{\"msg\" : \"Hello DataverseDownload\"}").build();
+		
+	}
 }
 
