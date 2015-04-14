@@ -38,7 +38,7 @@ public class Filesapis2dbRestApi {
 				.entity("{\"msg\" : \"Hello Filesapis2db\"}").build();
 	}
 	
-	@Path("dataverseName/Hello/Hello")
+	@Path("DataverseName/Hello/Hello")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response dataverseDownloadHello(){
@@ -46,7 +46,7 @@ public class Filesapis2dbRestApi {
 		
 	}
 	
-	@Path("dataverseName/{name}")
+	@Path("DataverseName/{name}")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response dataverseDownload(@PathParam("name") final String name){
