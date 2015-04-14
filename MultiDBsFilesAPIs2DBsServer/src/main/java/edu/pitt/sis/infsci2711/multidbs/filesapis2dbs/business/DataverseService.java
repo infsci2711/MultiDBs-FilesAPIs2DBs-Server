@@ -96,7 +96,7 @@ public class DataverseService {
 		
 		Client c = ClientBuilder.newClient();
 		
-		String url = "https://apitest.dataverse.org/api/search?q=" + file_name + "&key=2ef80c5a-4a9b-46c1-acf1-b8167fc2fe08";
+		String url = "https://apitest.dataverse.org/api/search?q=" + file_name + "&key=7e163064-4564-4c9e-b361-8f633dee77b9";
 		
         WebTarget target = c.target(UriBuilder.fromUri(url).build());
 //        String responseMsg = target.path("rest").path("test").request().get(String.class);
