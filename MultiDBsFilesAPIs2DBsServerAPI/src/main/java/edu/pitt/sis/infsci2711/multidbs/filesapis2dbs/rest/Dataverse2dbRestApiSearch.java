@@ -85,7 +85,7 @@ public class Dataverse2dbRestApiSearch<JSONObject> {
 		}
 	}
 	
-	@Path("dataverseName/Hello")
+	@Path("dataverseName/Hello/Hello")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response dataverseDownloadHello(){
