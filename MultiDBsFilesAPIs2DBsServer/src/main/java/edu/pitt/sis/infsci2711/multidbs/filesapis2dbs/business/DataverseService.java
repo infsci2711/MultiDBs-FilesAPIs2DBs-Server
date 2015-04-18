@@ -15,7 +15,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
 import org.json.JSONArray;
@@ -54,7 +53,7 @@ public class DataverseService {
 		SpssService s = new SpssService();
 		boolean flag = false;
 		try {
-			flag=s.createTable(t);
+			flag=s.create(t);
 			 s.add(fileReader);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
