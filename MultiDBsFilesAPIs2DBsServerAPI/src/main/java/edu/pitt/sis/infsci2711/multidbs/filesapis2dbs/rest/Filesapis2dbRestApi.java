@@ -38,34 +38,34 @@ public class Filesapis2dbRestApi {
 				.entity("{\"msg\" : \"Hello Filesapis2db\"}").build();
 	}
 	
-	@Path("DataverseName/Hello/Hello")
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response dataverseDownloadHello(){
-		return Response.status(200).entity("{\"msg\" : \"Hello DataverseDownload\"}").build();
-		
-	}
-	
-	@Path("DataverseName/{name}")
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response dataverseDownload(@PathParam("name") final String name){
-		boolean result = false;
-		DataverseService dataverSerivce = new DataverseService();
-		int spss_id = dataverSerivce.dataverseByName(name);
-//		int spss_id = Integer.parseInt(name);
-		try {
-			result = dataverSerivce.dataverseById(spss_id, name + ".sav");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(result == true){
-			return Response.status(200).entity("{\"msg\" : \"Download Success\"}").build();
-		}else{
-			return Response.status(200).entity("{\"msg\" : \"Download Fail\"}").build();
-		}
-	}
+//	@Path("DataverseName/Hello/Hello")
+//	@POST
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response dataverseDownloadHello(){
+//		return Response.status(200).entity("{\"msg\" : \"Hello DataverseDownload\"}").build();
+//		
+//	}
+//	
+//	@Path("DataverseName/{name}")
+//	@POST
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response dataverseDownload(@PathParam("name") final String name){
+//		boolean result = false;
+//		DataverseService dataverSerivce = new DataverseService();
+//		int spss_id = dataverSerivce.dataverseByName(name);
+////		int spss_id = Integer.parseInt(name);
+//		try {
+//			result = dataverSerivce.dataverseById(spss_id, name + ".sav");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		if(result == true){
+//			return Response.status(200).entity("{\"msg\" : \"Download Success\"}").build();
+//		}else{
+//			return Response.status(200).entity("{\"msg\" : \"Download Fail\"}").build();
+//		}
+//	}
 
 
 	@Path("SPSSUpload")
