@@ -87,10 +87,8 @@ public class DataverseService {
 		}
 	
 	
-	@Path("{file_name}")
-	@GET
-    @Produces(MediaType.APPLICATION_JSON)
-	public int dataverseByName(@PathParam("file_name") final String file_name) {
+
+	public int dataverseByName(String file_name) {
 		
 		//Sent rest api by file_name = trees
 		
