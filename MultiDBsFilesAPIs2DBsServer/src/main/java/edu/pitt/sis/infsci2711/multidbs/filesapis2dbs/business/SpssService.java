@@ -5,15 +5,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.dao.SpssDAO;
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.models.TableDBModel;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileReader2;
 
 public class SpssService {
 	SpssDAO spssDAO;
 
-	public boolean createTable(ArrayList<String> t) throws SQLException,
+	public boolean create(ArrayList<String> t) throws SQLException,
 			Exception {
 		spssDAO = new SpssDAO();
-		boolean flag = spssDAO.createTable(t);
+		boolean flag = spssDAO.create(t);
 		return flag;
 	}
 
@@ -26,5 +27,10 @@ public class SpssService {
 		int res = spssDAO.save(tableName, file.addTuples());
 
 		return res;
+	}
+	public TableDBModel readtable(String tbname) throws Exception{
+		spssDAO = new SpssDAO();
+		TableDBModel table=spssDAO.readtable(tbname);
+		return table;
 	}
 }

@@ -29,6 +29,8 @@ public class Filesapis2dbRestApi {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response helloWorld() {
+		
+		
 		return Response.status(200)
 				.entity("{\"msg\" : \"Hello Filesapis2db\"}").build();
 	}
@@ -45,10 +47,8 @@ public class Filesapis2dbRestApi {
 	 
 			// save it
 			writeToFile(uploadedInputStream, uploadedFileLocation);
-			
 			String output = "File uploaded to : " + uploadedFileLocation;
 			System.out.println(output);
-			System.out.println("hello!");
 			create(uploadedFileLocation);  //create table and tuples
 			
 			return Response.status(200).entity(output).build();
@@ -61,7 +61,7 @@ public class Filesapis2dbRestApi {
 			SpssService s = new SpssService();
 			boolean flag=false;
 			try {
-				flag=s.createTable(t);
+				flag=s.create(t);
 				 s.add(fileReader);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

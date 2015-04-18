@@ -1,22 +1,26 @@
 package edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.JdbcUtil;
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.models.TableDBModel;
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.JdbcUtil1;
 
 public class SpssDAO {
 
 	String sql;
+	String sq12;
 
-	public boolean createTable(ArrayList<String> t) throws SQLException,
+	public boolean create(ArrayList<String> t) throws SQLException,
 			Exception {
 
-		try (Connection connection = JdbcUtil.getConnection()) {
+		try (Connection connection = JdbcUtil1.getConnection()) {
+			String sql2="create database if not exists "+t.get(0);
 
-			String sql = "create table if not exists " + t.get(0) + "( ";
+			String sql = "use "+t.get(0)+"; create table if not exists " + t.get(0) + "( ";
 			for (int i = 1; i < t.size(); i++) {
 				sql = sql + " " + t.get(i) + " ";
 
@@ -34,12 +38,13 @@ public class SpssDAO {
 			}
 			sql += ");";
 			System.out.println(sql);
-			try (Statement statement = connection.createStatement()) {
+			Statement statement = connection.createStatement();
+			Statement statement1 = connection.createStatement();
 
-				boolean flag = statement.execute(sql);
-
+				boolean flag = statement.execute(sql2);
+				flag=statement1.execute(sql);
 				return flag;
-			}
+			
 		}
 	}
 
@@ -48,7 +53,7 @@ public class SpssDAO {
 			Exception {
 
 		int res = 0;
-		try (Connection connection = JdbcUtil.getConnection()) {
+		try (Connection connection = JdbcUtil1.getConnection()) {
 			for (int i = 0; i < rows.size(); i++) {
 				sql = "INSERT INTO " + tableName + " VALUES (";
 				for (int j=0;j<rows.get(i).size();j++) {
@@ -71,6 +76,38 @@ public class SpssDAO {
 				}
 			}
 			return res;
+		}
+	}
+	public TableDBModel readtable(String tbname) throws Exception{
+		TableDBModel table=new TableDBModel();
+		try (Connection connection = JdbcUtil1.getConnection()) {
+			Statement statement = connection.createStatement();
+			String sql = "select COLUMN_NAME from information_schema.COLUMNS where table_name ='"+tbname+"'";// 'your_table_name' and table_schema = 'your_db_name'		
+			//System.out.println(sql);
+		
+			ResultSet rs = statement.executeQuery(sql);
+			while(rs.next()){
+				table.addColumnName(rs.getString(1));
+			}
+			int n=table.columnNum();
+			sql="select * from "+tbname;
+			ResultSet rs1=statement.executeQuery(sql);
+			while(rs1.next()){
+				ArrayList<String> a=new ArrayList<String>();
+				for(int i=1;i<=n;i++){
+					a.add(rs1.getString(i));
+				}
+				table.addRow(a);
+				
+			}
+		}
+			catch(Exception e){
+				
+				System.out.println(e);
+				
+			}
+		finally{
+		return table;
 		}
 	}
 
