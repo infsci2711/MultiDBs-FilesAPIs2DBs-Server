@@ -25,8 +25,11 @@ import org.json.JSONObject;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileReader2;
 
 public class DataverseService {
+	
+	static String dataverseKey = "4f382c12-c057-4a4a-b03c-29bce7203b30";
 
 	public boolean dataverseById(final int id, final String name) throws IOException {
+		
 		
 		String idString =String.valueOf(id);
 		
@@ -96,7 +99,7 @@ public class DataverseService {
 		
 		Client c = ClientBuilder.newClient();
 		
-		String url = "https://apitest.dataverse.org/api/search?q=" + file_name + "&key=7e163064-4564-4c9e-b361-8f633dee77b9";
+		String url = "https://apitest.dataverse.org/api/search?q=" + file_name + "&key=" + dataverseKey;
 		
         WebTarget target = c.target(UriBuilder.fromUri(url).build());
 //        String responseMsg = target.path("rest").path("test").request().get(String.class);
