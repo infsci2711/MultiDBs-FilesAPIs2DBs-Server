@@ -19,7 +19,7 @@ cd target
 cp multidbsfilesapis2dbsserverapi-0.1-SNAPSHOT.jar ../../../deployed/
 kill -9 $(lsof -t -i:7654)
 cd /opt/project/deployed
-java -jar multidbsfilesapis2dbsserverapi-0.1-SNAPSHOT.jar > log.out 2> error.log < /dev/null &
+java -jar multidbsfilesapis2dbsserverapi-0.1-SNAPSHOT.jar /opt/project/MultiDBs-FilesAPIs2DBs-Server/MultiDBsFilesAPIs2DBsServerAPI/src/main/resources/config.properties > log.out 2> error.log < /dev/null &
 mysql -u dataverse -pdataverse
 show databases;
 use infsci2711_filesapi2dbs;
