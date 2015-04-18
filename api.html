@@ -32,9 +32,17 @@
 
 <p>API of converting SPSS file. <br>
   -Upload SPSS file, converting SPSS file to SQL query, create new talbe in database and store the data. <br>
+  -Path://52.0.188.59:7654/Filesapis2db/SPSSUpload<br>
   -Method: post<br>
   -Input Param: SPSS file<br>
   -Output Param: SQL query<p>
+
+  <p>API of request the file in the Dataverse<br>
+    -Using the ID of the dataset in the Dataverse to download the desired file and upload the file to the server.<br>
+    -Path://52.0.188.59:7654/Filesapis2db/DataverseName/{name}/{dataverseName}<br>
+    -Method: post<br>
+    -Input Param: name : File name on Dataverse  dataverseName : dataverse ID<br>
+    -Output Param: None</p>
 
 
   <p>API of reading from database<br>
@@ -52,11 +60,7 @@
     </p>
 
 
-    <p>API of request the file in the Dataverse<br>
-    -Using the ID of the dataset in the Dataverse to download the desired file and upload the file to the server.<br>
-    -Method: post<br>
-    -Input Param: ID of the dataset<br>
-    -Output Param: None</p>
+    
 
 
 
