@@ -25,6 +25,9 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.DataverseService;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.SpssService;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileReader2;
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.viewModels.CatalogViewModel;
+import edu.pitt.sis.infsci2711.multidbs.utils.JerseyClientUtil;
+import edu.pitt.sis.infsci2711.multidbs.utils.PropertiesManager;
 
 
 @Path("Filesapis2db/")
@@ -55,13 +58,17 @@ public class Filesapis2dbRestApi {
 		boolean result = false;
 		DataverseService dataverSerivce = new DataverseService();
 		int spss_id = dataverSerivce.dataverseByName(name);
-//		int spss_id = Integer.parseInt(name);
 		try {
 			result = dataverSerivce.dataverseById(spss_id, name + ".sav");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		CatalogViewModel catalogViewModel = new CatalogViewModel(name, "52.0.188.59", "7654", "MySQL", "dataverse", "dataverse", name);
+		Response result2 = JerseyClientUtil.doPost(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
+		
+		
 		if(result == true){
 			return Response.status(200).entity("{\"msg\" : \"Download Success\"}").build();
 		}else{
@@ -85,15 +92,10 @@ public class Filesapis2dbRestApi {
 			System.out.println(output);
 			create(uploadedFileLocation);  //create table and tuples
 			
+			CatalogViewModel catalogViewModel = new CatalogViewModel(fileDetail.getFileName(), "52.0.188.59", "7654", "MySQL", "dataverse", "dataverse", fileDetail.getFileName());
+			Response result2 = JerseyClientUtil.doPost(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
+			
 			return Response.status(200).entity(output).build();
-//			URI uri = null;
-//			try {
-//				uri = new URI("http://localhost:8080/MultiDBs-FilesAPIs2DBs-WebClient/tutorial.html");
-//			} catch (URISyntaxException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			return Response.temporaryRedirect(uri).build();
 	 
 		}
 	
