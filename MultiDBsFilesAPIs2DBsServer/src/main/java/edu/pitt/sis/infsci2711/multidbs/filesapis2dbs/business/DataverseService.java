@@ -128,4 +128,45 @@ public class DataverseService {
 		
 	}
 	
+public int dataverseByNameRevise(String file_name, String dataverseName) {
+		
+		//Sent rest api by file_name = trees
+		
+		//binary inputstream -> save to upload
+		
+		Client c = ClientBuilder.newClient();
+		
+		String url = "https://apitest.dataverse.org/api/search?q=" + file_name + "&subtree=" + dataverseName + "&key=" + dataverseKey;
+		
+        WebTarget target = c.target(UriBuilder.fromUri(url).build());
+//        String responseMsg = target.path("rest").path("test").request().get(String.class);
+        String responseMsg = target.request().get(String.class);
+       JSONObject json;
+       int id = 0;
+	try {
+		json = new JSONObject(responseMsg);
+	       JSONObject data = json.getJSONObject("data");
+	       JSONArray item = data.getJSONArray("items");
+//	       String line = "";
+	       for(int i=0; i<item.length();i++){
+	    	   org.json.JSONObject file = item.getJSONObject(i);
+	        if( file.has("file_id")){
+	  //      	line = "{\"file_id\": \"" + file.getString("file_id") + "\"}";
+	        	id = Integer.parseInt(file.getString("file_id"));
+	        }
+	       }
+	       
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+       
+
+    //   org.json.JSONObject id = new org.json.JSONObject(line);
+
+		return id;
+		
+	}
+
+	
 }
