@@ -23,7 +23,7 @@ public class SpssService {
 		String fileName = file.getFilepath();
 		String tableName = fileName.replace(".sav", "");
 		tableName = tableName.replace("upload" + File.separatorChar, "");
-
+		tableName=tableName.toLowerCase();
 		int res = spssDAO.save(tableName, file.addTuples());
 
 		return res;

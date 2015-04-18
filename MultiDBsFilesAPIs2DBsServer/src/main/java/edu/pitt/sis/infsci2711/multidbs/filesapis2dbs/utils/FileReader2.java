@@ -46,6 +46,7 @@ public class FileReader2 {
 			Vector var = reader.getVariables();
 			String sf = filepath.replace(".sav", "");
 			sf = sf.replace("upload" + File.separatorChar, "");
+			sf=sf.toLowerCase();
 			tableList.add(sf);
 			for (int j = 0; j < var.size(); j++) {
 				String s;

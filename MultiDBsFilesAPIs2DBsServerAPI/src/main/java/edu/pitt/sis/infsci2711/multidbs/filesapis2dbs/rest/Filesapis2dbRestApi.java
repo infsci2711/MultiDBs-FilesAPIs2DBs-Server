@@ -5,8 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
@@ -17,7 +15,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -25,9 +22,6 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.DataverseService;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.SpssService;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileReader2;
-import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.viewModels.CatalogViewModel;
-import edu.pitt.sis.infsci2711.multidbs.utils.JerseyClientUtil;
-import edu.pitt.sis.infsci2711.multidbs.utils.PropertiesManager;
 
 
 @Path("Filesapis2db/")

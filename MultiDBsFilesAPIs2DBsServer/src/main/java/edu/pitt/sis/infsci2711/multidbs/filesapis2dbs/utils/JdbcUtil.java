@@ -12,7 +12,7 @@ public class JdbcUtil {
 	
 	public static final String DEFAULT_PASSWOD = "dataverse"; // CHANGE TO YOUR MYSQL PASSWORD
 	
-	public static final String DEFAULT_DATABASE = "infsci2711_filesapi2dbs";
+//	public static final String DEFAULT_DATABASE = "infsci2711_filesapi2dbs";
 	
 	public static Connection getConnection() throws Exception {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -21,6 +21,6 @@ public class JdbcUtil {
 	}
 	
 	public static String getConnectionString() {
-		return String.format("jdbc:mysql://%s:%d/%s", DEFAULT_HOST, DEFAULT_PORT, DEFAULT_DATABASE);
+		return String.format("jdbc:mysql://%s:%d", DEFAULT_HOST, DEFAULT_PORT);
 	}
 }

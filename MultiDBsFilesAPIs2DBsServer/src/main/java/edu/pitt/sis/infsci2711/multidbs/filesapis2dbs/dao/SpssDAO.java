@@ -12,15 +12,18 @@ import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.JdbcUtil;
 public class SpssDAO {
 
 	String sql;
-	String sq12;
+	String sql0;
 
-	public boolean create1 (ArrayList<String> t) throws SQLException,
+	public boolean create (ArrayList<String> t) throws SQLException,
 			Exception {
 
 		try (Connection connection = JdbcUtil.getConnection()) {
-			String sql2="create database if not exists "+t.get(0);
-
-			String sql = "use "+t.get(0)+"; create table if not exists " + t.get(0) + "( ";
+			
+//			System.out.println("ssssssssssssssssssssssssssssssss");
+			String sql0="create database if not exists "+t.get(0);
+//			System.out.println(sql0);
+			String sql00="use "+t.get(0);
+			String sql = "create table if not exists " + t.get(0) + "( ";
 			for (int i = 1; i < t.size(); i++) {
 				sql = sql + " " + t.get(i) + " ";
 
@@ -37,14 +40,18 @@ public class SpssDAO {
 
 			}
 			sql += ");";
+			System.out.println("..............................");
+			System.out.println(sql0);
 			System.out.println(sql);
 			boolean flag=false;
 			try{
 			Statement statement = connection.createStatement();
 			Statement statement1 = connection.createStatement();
+			Statement statement2=connection.createStatement();
           
-				 flag = statement.execute(sql2);
-				flag=statement1.execute(sql);
+				 flag = statement.execute(sql0);
+				 statement1.execute(sql00);
+				flag=statement2.execute(sql);
 				
 			}
 			catch (Exception e){
@@ -54,7 +61,7 @@ public class SpssDAO {
 		}
 	}
 
-	public boolean create(ArrayList<String> t) throws SQLException,
+	public boolean create2(ArrayList<String> t) throws SQLException,
 	Exception {
 
 try (Connection connection = JdbcUtil.getConnection()) {
@@ -100,7 +107,7 @@ try (Connection connection = JdbcUtil.getConnection()) {
 		int res = 0;
 		try (Connection connection = JdbcUtil.getConnection()) {
 			for (int i = 0; i < rows.size(); i++) {
-				sql = "INSERT INTO " + tableName + " VALUES (";
+				sql ="INSERT INTO " + tableName +"."+tableName+ " VALUES (";
 				for (int j=0;j<rows.get(i).size();j++) {
 					Object o = rows.get(i).get(j);
 					
@@ -111,7 +118,6 @@ try (Connection connection = JdbcUtil.getConnection()) {
 						sql += ")";
 					}
 					
-
 				}
 				try (Statement statement = connection.createStatement()) {
 
