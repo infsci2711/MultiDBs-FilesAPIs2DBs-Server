@@ -62,8 +62,8 @@ public class Filesapis2dbRestApi {
 			e.printStackTrace();
 		}
 
-		CatalogViewModel catalogViewModel = new CatalogViewModel(name, "52.0.188.59", "7654", "MySQL", "dataverse", "dataverse", name);
-		Response result2 = JerseyClientUtil.doPost(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
+//		CatalogViewModel catalogViewModel = new CatalogViewModel(name, "52.0.188.59", "7654", "MySQL", "dataverse", "dataverse", name);
+//		Response result2 = JerseyClientUtil.doPost(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
 		
 		
 		if(result == true){
@@ -112,8 +112,8 @@ public class Filesapis2dbRestApi {
 			System.out.println(output);
 			create(uploadedFileLocation);  //create table and tuples
 			
-			CatalogViewModel catalogViewModel = new CatalogViewModel(fileDetail.getFileName(), "52.0.188.59", "7654", "MySQL", "dataverse", "dataverse", fileDetail.getFileName());
-			Response result2 = JerseyClientUtil.doPost(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
+//			CatalogViewModel catalogViewModel = new CatalogViewModel(fileDetail.getFileName(), "52.0.188.59", "7654", "MySQL", "dataverse", "dataverse", fileDetail.getFileName());
+//			Response result2 = JerseyClientUtil.doPost(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
 			
 			return Response.status(200).entity(output).build();
 	 
