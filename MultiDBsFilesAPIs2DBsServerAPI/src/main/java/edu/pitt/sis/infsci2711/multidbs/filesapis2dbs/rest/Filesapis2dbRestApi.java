@@ -77,8 +77,8 @@ public class Filesapis2dbRestApi {
 					datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
 					datasourceViewModel.getDbName()));
 			
-			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
-					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
+//			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+//					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
 		}
 		catch (Exception e) {
 			logger.error("Request to metastore failed:", e);
@@ -119,8 +119,8 @@ public class Filesapis2dbRestApi {
 					datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
 					datasourceViewModel.getDbName()));
 			
-			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
-					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
+//			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+//					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
 		}
 		catch (Exception e) {
 			logger.error("Request to metastore failed:", e);
@@ -161,8 +161,8 @@ public class Filesapis2dbRestApi {
 						datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
 						datasourceViewModel.getDbName()));
 				
-				Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
-						PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
+//				Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+//						PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
 			
 			}
 			catch (Exception e) {
