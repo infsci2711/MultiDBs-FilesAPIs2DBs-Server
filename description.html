@@ -28,13 +28,80 @@
         <h1>
 <a id="multidbs-filesapis2dbs-server" class="anchor" href="#multidbs-filesapis2dbs-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>MultiDBs-FilesAPIs2DBs-Server</h1>
 
-<p>PROJECT INSTALLATION <br>
-1.Git pull our entire project <br>
-2.Run startup.sh file in /opt/project/MultiDBs-FilesAPIs2DBs-Server to initialize the database<br>
-3.Run mvnshell.sh file in /opt/project/MultiDBs-FilesAPIs2DBs-Server to start the server and other initialization.</p>
+<p><h3>PROJECT INSTALLATION <br><br></h3>
+1.Logging into the server<br>
+Mac: <br>
+a.input: <br>
+<code> ssh YOURUSERNAME@IP </code><br>
+b.input your password<br>
+Windows: <br>
+a. download PuTTy <br>
+b. In the opened window enter server IP in the host area and leave port 22 as default. <br>
+c. Then click open and in the opened window enter your username, hit enter, then enter your password.<br><br>
+
+2. Preparing Ubuntu<br>
+input:<br>
+<code> 
+sudo apt-get install maven<br>
+sudo apt-get install git<br>
+sudo apt-get install openjdk-7-jdk<br>
+sudo apt-get install mysql-server<br>
+sudo apt-get install nginx<br>
+</code><br><br>
+
+3. Getting the source code to the server<br>
+a. Create project and deployed folder under the /opt folder:<br>
+<code> 
+cd /opt<br>
+sudo mkdir project<br>
+cd project<br>
+sudo mkdir deployed<br>
+cd deployed<br>
+sudo mkdir upload<br>
+</code><br>
+b. Clone all required github repos<br>
+<code>
+cd /opt/project<br>
+sudo git clone https://github.com/infsci2711/MultiDBs-Utils.git<br>
+sudo git clone https://github.com/infsci2711/MultiDBs-FilesAPIs2DBs-Server.git<br>
+sudo git clone https://github.com/infsci2711/MultiDBs-FilesAPIs2DBs-WebClient.git<br>
+</code><br>
+c. Serve it with the nginx<br>
+<code> 
+cd /usr/share/nginx<br>
+sudo rm -R html<br>
+sudo ln -sv /opt/project/MultiDBs-FilesAPIs2DBs-WebClient/WebContent html<br>
+</code> <br>
+d. Change the restBaseUrl<br>
+"We can do that for you. Otherwise you need to change it in the code."<br>
+In /opt/project/MultiDBs-FilesAPIs2DBs-WebClient/WebContent/javascripts/SPSSUpload.js<br>
+change the following part according to you IP.<br>
+<code><
+var restBaseUrl = "http://52.0.4.98:7654/";<br>
+</code><br>
+e. Make your MySQL accessible remotely.<br>
+<code>
+cd /etc/mysql<br>
+vi my.cnf<br>
+</code><br>
+change the #bind-address to 0.0.0.0<br>
+Save it.<br>
+
+4. Publish your server<br>
+<code>
+cd /opt/project/MultiDBs-FilesAPIs2DBs-Server<br>
+sh startup.sh<br>
+sh mvnInstall.sh<br>
+</code><br><br>
+
+5. Congratulations, you have published you own SPSS file upload and download system.<br>
+
+</p>
 
 
-<p>PROJECT DESCRIPTION</p>
+
+
+<p><h3>PROJECT DESCRIPTION</p></h3>
 
 <p>Generally, our project has three parts, the front end, Dataverse interface and the back end.</p>
 
