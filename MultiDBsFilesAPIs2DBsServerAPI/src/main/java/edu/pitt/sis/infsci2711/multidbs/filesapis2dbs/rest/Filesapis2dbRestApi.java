@@ -72,7 +72,7 @@ public class Filesapis2dbRestApi {
 					PropertiesManager.getInstance().getStringProperty("port"), 
 					"MySQL", "dataverse", "dataverse", name);
 			
-			Response result2 = JerseyClientUtil.doPost(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
 					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
 		}
 		catch (Exception e) {
@@ -109,7 +109,7 @@ public class Filesapis2dbRestApi {
 					PropertiesManager.getInstance().getStringProperty("port"), 
 					"MySQL", "dataverse", "dataverse", name);
 			
-			Response result2 = JerseyClientUtil.doPost(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
 					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
 		}
 		catch (Exception e) {
@@ -146,7 +146,7 @@ public class Filesapis2dbRestApi {
 						PropertiesManager.getInstance().getStringProperty("port"), 
 						"MySQL", "dataverse", "dataverse", fileDetail.getFileName());
 				
-				Response result2 = JerseyClientUtil.doPost(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+				Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
 						PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
 			
 			}
