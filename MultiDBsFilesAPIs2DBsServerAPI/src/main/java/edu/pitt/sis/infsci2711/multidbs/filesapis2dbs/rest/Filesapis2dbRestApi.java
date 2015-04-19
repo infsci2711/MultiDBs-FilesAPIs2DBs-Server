@@ -24,7 +24,7 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.DataverseService;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.SpssService;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileReader2;
-import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.viewModels.CatalogViewModel;
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.viewModels.DatasourceViewModel;
 import edu.pitt.sis.infsci2711.multidbs.utils.JerseyClientUtil;
 import edu.pitt.sis.infsci2711.multidbs.utils.PropertiesManager;
 
@@ -67,18 +67,18 @@ public class Filesapis2dbRestApi {
 		}
 
 		try {
-			CatalogViewModel catalogViewModel = new CatalogViewModel(name, 
+			DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
 					PropertiesManager.getInstance().getStringProperty("ip"), 
-					PropertiesManager.getInstance().getStringProperty("port"), 
-					"MySQL", "dataverse", "dataverse", name);
+					PropertiesManager.getInstance().getIntProperty("port"), 
+					"dataverse", "dataverse", name, name, name);
 			
 			logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
-					catalogViewModel.getIP(), catalogViewModel.getPort(),
-					catalogViewModel.getDBType(),catalogViewModel.getUsername(), catalogViewModel.getPassword(),
-					catalogViewModel.getDBname()));
+					datasourceViewModel.getIpAddress(), datasourceViewModel.getPort(),
+					datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
+					datasourceViewModel.getDbName()));
 			
 			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
-					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
+					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
 		}
 		catch (Exception e) {
 			logger.error("Request to metastore failed:", e);
@@ -109,18 +109,18 @@ public class Filesapis2dbRestApi {
 		}
 		
 		try {
-			CatalogViewModel catalogViewModel = new CatalogViewModel(name, 
+			DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
 					PropertiesManager.getInstance().getStringProperty("ip"), 
-					PropertiesManager.getInstance().getStringProperty("port"), 
-					"MySQL", "dataverse", "dataverse", name);
+					PropertiesManager.getInstance().getIntProperty("port"), 
+					"dataverse", "dataverse", name, name, name);
 			
 			logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
-					catalogViewModel.getIP(), catalogViewModel.getPort(),
-					catalogViewModel.getDBType(),catalogViewModel.getUsername(), catalogViewModel.getPassword(),
-					catalogViewModel.getDBname()));
+					datasourceViewModel.getIpAddress(), datasourceViewModel.getPort(),
+					datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
+					datasourceViewModel.getDbName()));
 			
 			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
-					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
+					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
 		}
 		catch (Exception e) {
 			logger.error("Request to metastore failed:", e);
@@ -151,18 +151,18 @@ public class Filesapis2dbRestApi {
 			create(uploadedFileLocation);  //create table and tuples
 			
 			try {
-				CatalogViewModel catalogViewModel = new CatalogViewModel(fileDetail.getFileName(), 
+				DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
 						PropertiesManager.getInstance().getStringProperty("ip"), 
-						PropertiesManager.getInstance().getStringProperty("port"), 
-						"MySQL", "dataverse", "dataverse", fileDetail.getFileName());
+						PropertiesManager.getInstance().getIntProperty("port"), 
+						"dataverse", "dataverse", fileDetail.getFileName(), fileDetail.getFileName(), fileDetail.getFileName());
 				
 				logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
-						catalogViewModel.getIP(), catalogViewModel.getPort(),
-						catalogViewModel.getDBType(),catalogViewModel.getUsername(), catalogViewModel.getPassword(),
-						catalogViewModel.getDBname()));
+						datasourceViewModel.getIpAddress(), datasourceViewModel.getPort(),
+						datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
+						datasourceViewModel.getDbName()));
 				
 				Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
-						PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
+						PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
 			
 			}
 			catch (Exception e) {
