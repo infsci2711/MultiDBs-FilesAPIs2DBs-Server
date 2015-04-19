@@ -72,6 +72,11 @@ public class Filesapis2dbRestApi {
 					PropertiesManager.getInstance().getStringProperty("port"), 
 					"MySQL", "dataverse", "dataverse", name);
 			
+			logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
+					catalogViewModel.getIP(), catalogViewModel.getPort(),
+					catalogViewModel.getDBType(),catalogViewModel.getUsername(), catalogViewModel.getPassword(),
+					catalogViewModel.getDBname()));
+			
 			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
 					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
 		}
@@ -109,6 +114,11 @@ public class Filesapis2dbRestApi {
 					PropertiesManager.getInstance().getStringProperty("port"), 
 					"MySQL", "dataverse", "dataverse", name);
 			
+			logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
+					catalogViewModel.getIP(), catalogViewModel.getPort(),
+					catalogViewModel.getDBType(),catalogViewModel.getUsername(), catalogViewModel.getPassword(),
+					catalogViewModel.getDBname()));
+			
 			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
 					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
 		}
@@ -145,6 +155,11 @@ public class Filesapis2dbRestApi {
 						PropertiesManager.getInstance().getStringProperty("ip"), 
 						PropertiesManager.getInstance().getStringProperty("port"), 
 						"MySQL", "dataverse", "dataverse", fileDetail.getFileName());
+				
+				logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
+						catalogViewModel.getIP(), catalogViewModel.getPort(),
+						catalogViewModel.getDBType(),catalogViewModel.getUsername(), catalogViewModel.getPassword(),
+						catalogViewModel.getDBname()));
 				
 				Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
 						PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
