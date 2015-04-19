@@ -143,7 +143,7 @@ public class Filesapis2dbRestApi {
 			@FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException{
 	 
 			String uploadedFileLocation = "upload"+ File.separatorChar + fileDetail.getFileName();
-	 
+			String fileName = fileDetail.getFileName().replace(".sav", "");
 			// save it
 			writeToFile(uploadedInputStream, uploadedFileLocation);
 			String output = "File uploaded to : " + uploadedFileLocation;
@@ -154,15 +154,15 @@ public class Filesapis2dbRestApi {
 				DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
 						PropertiesManager.getInstance().getStringProperty("ip"), 
 						PropertiesManager.getInstance().getIntProperty("database"), 
-						"dataverse", "dataverse", fileDetail.getFileName(), fileDetail.getFileName(), fileDetail.getFileName());
+						"dataverse", "dataverse", fileName, fileName, fileName);
 				
 				logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
 						datasourceViewModel.getIpAddress(), datasourceViewModel.getPort(),
 						datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
 						datasourceViewModel.getDbName()));
 				
-				Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
-						PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
+//				Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+//						PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
 			
 			}
 			catch (Exception e) {
