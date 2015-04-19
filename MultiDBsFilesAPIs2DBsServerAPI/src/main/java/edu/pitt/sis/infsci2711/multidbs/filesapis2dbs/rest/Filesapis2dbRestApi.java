@@ -69,7 +69,7 @@ public class Filesapis2dbRestApi {
 		try {
 			DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
 					PropertiesManager.getInstance().getStringProperty("ip"), 
-					PropertiesManager.getInstance().getIntProperty("port"), 
+					PropertiesManager.getInstance().getIntProperty("database"), 
 					"dataverse", "dataverse", name, name, name);
 			
 			logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
@@ -77,8 +77,8 @@ public class Filesapis2dbRestApi {
 					datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
 					datasourceViewModel.getDbName()));
 			
-//			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
-//					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
+			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
 		}
 		catch (Exception e) {
 			logger.error("Request to metastore failed:", e);
@@ -111,7 +111,7 @@ public class Filesapis2dbRestApi {
 		try {
 			DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
 					PropertiesManager.getInstance().getStringProperty("ip"), 
-					PropertiesManager.getInstance().getIntProperty("port"), 
+					PropertiesManager.getInstance().getIntProperty("database"), 
 					"dataverse", "dataverse", name, name, name);
 			
 			logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
@@ -119,8 +119,8 @@ public class Filesapis2dbRestApi {
 					datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
 					datasourceViewModel.getDbName()));
 			
-//			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
-//					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
+			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
 		}
 		catch (Exception e) {
 			logger.error("Request to metastore failed:", e);
@@ -153,7 +153,7 @@ public class Filesapis2dbRestApi {
 			try {
 				DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
 						PropertiesManager.getInstance().getStringProperty("ip"), 
-						PropertiesManager.getInstance().getIntProperty("port"), 
+						PropertiesManager.getInstance().getIntProperty("database"), 
 						"dataverse", "dataverse", fileDetail.getFileName(), fileDetail.getFileName(), fileDetail.getFileName());
 				
 				logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
@@ -161,8 +161,8 @@ public class Filesapis2dbRestApi {
 						datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
 						datasourceViewModel.getDbName()));
 				
-//				Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
-//						PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
+				Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+						PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
 			
 			}
 			catch (Exception e) {
