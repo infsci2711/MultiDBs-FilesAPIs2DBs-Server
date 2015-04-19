@@ -102,6 +102,20 @@ public class Filesapis2dbRestApi {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try {
+			CatalogViewModel catalogViewModel = new CatalogViewModel(name, 
+					PropertiesManager.getInstance().getStringProperty("ip"), 
+					PropertiesManager.getInstance().getStringProperty("port"), 
+					"MySQL", "dataverse", "dataverse", name);
+			
+			Response result2 = JerseyClientUtil.doPost(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), catalogViewModel);
+		}
+		catch (Exception e) {
+			logger.error("Request to metastore failed:", e);
+		}
+		
 		if(result == true){
 			return Response.status(200).entity("{\"msg\" : \"Download Success\"}").build();
 		}else{
