@@ -70,7 +70,7 @@ public class Filesapis2dbRestApi {
 			DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
 					PropertiesManager.getInstance().getStringProperty("ip"), 
 					PropertiesManager.getInstance().getIntProperty("database"), 
-					"dataverse", "dataverse", name, name, name);
+					"dataverse", "dataverse", name.toLowerCase(), name.toLowerCase(), name.toLowerCase());
 			
 			logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
 					datasourceViewModel.getIpAddress(), datasourceViewModel.getPort(),
@@ -112,7 +112,7 @@ public class Filesapis2dbRestApi {
 			DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
 					PropertiesManager.getInstance().getStringProperty("ip"), 
 					PropertiesManager.getInstance().getIntProperty("database"), 
-					"dataverse", "dataverse", name, name, name);
+					"dataverse", "dataverse", name.toLowerCase(), name.toLowerCase(), name.toLowerCase());
 			
 			logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
 					datasourceViewModel.getIpAddress(), datasourceViewModel.getPort(),
@@ -154,7 +154,7 @@ public class Filesapis2dbRestApi {
 				DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
 						PropertiesManager.getInstance().getStringProperty("ip"), 
 						PropertiesManager.getInstance().getIntProperty("database"), 
-						"dataverse", "dataverse", fileName, fileName, fileName);
+						"dataverse", "dataverse", fileName.toLowerCase(), fileName.toLowerCase(), fileName.toLowerCase());
 				
 				logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
 						datasourceViewModel.getIpAddress(), datasourceViewModel.getPort(),
