@@ -41,6 +41,7 @@ mvn install
 echo "building server project"
 
 cd /opt/project/MultiDBs-FilesAPIs2DBs-Server
+mvn clean
 mvn install
 
 echo "creating folder for deployed code"
