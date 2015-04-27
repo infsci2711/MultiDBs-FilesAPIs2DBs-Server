@@ -38,6 +38,7 @@ ENTRYPOINT ["/home/files2dbs/entrypoint.sh"]
 
 EXPOSE 22
 EXPOSE 7654
+EXPOSE 3306
 
 VOLUME /opt/project/deployed
 
