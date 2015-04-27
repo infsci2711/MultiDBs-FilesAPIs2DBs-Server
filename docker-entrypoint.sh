@@ -51,8 +51,8 @@ mkdir -p deployed
 
 echo "copying jar and config file to deploed folder"
 
-cp /opt/project/MultiDBs-MetaStore-Server/MultiDBsFilesAPIs2DBsServerAPI/target/multidbsfilesapis2dbsserverapi-0.1-SNAPSHOT.jar /opt/project/deployed
-cp /opt/project/MultiDBs-MetaStore-Server/MultiDBsFilesAPIs2DBsServerAPI/src/main/resources/config.properties /opt/project/deployed
+cp /opt/project/MultiDBs-FilesAPIs2DBs-Server/MultiDBsFilesAPIs2DBsServerAPI/target/multidbsfilesapis2dbsserverapi-0.1-SNAPSHOT.jar /opt/project/deployed
+cp /opt/project/MultiDBs-FilesAPIs2DBs-Server/MultiDBsFilesAPIs2DBsServerAPI/src/main/resources/config.properties /opt/project/deployed
 
 echo "starting java server"
 
