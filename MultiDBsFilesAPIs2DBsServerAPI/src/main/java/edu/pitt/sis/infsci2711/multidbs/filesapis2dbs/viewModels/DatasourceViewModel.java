@@ -6,7 +6,7 @@ public class DatasourceViewModel {
 	private int id;
 	private String dbType;
 	private String  ipAddress;
-	private int port;
+	private int port=3306;
 	private String username;
 	private String password;
 	private String dbName;

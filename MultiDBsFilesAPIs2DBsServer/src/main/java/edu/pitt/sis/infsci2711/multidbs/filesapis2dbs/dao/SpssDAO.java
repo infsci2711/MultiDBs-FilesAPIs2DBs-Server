@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.models.TableDBModel;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.JdbcUtil;
+import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.JdbcUtil1;
 
 public class SpssDAO {
 
@@ -64,7 +65,7 @@ public class SpssDAO {
 	public boolean create2(ArrayList<String> t) throws SQLException,
 	Exception {
 
-try (Connection connection = JdbcUtil.getConnection()) {
+try (Connection connection = JdbcUtil1.getConnection()) {
 //	String sql2="create database if not exists "+t.get(0);
 
 	String sql = " create table if not exists " + t.get(0) + "( ";

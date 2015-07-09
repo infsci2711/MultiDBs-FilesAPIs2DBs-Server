@@ -7,14 +7,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
 import org.json.JSONArray;
@@ -25,11 +20,11 @@ import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileReader2;
 
 public class DataverseService {
 	
-	static String dataverseKey = "f1395a30-0758-4bed-8238-71e4dd9ac409";
+	static String dataverseKey = "0fc954b0-e7d8-45df-b8ea-4a39066bbdbd";
 
-	public boolean dataverseById(final int id, final String name) throws IOException {
+	public boolean dataverseById( final int id,  final String name) throws IOException {
 		
-		
+	
 		String idString =String.valueOf(id);
 		
 		//Sent rest api by id
@@ -42,13 +37,19 @@ public class DataverseService {
 //      String responseMsg = target.path("rest").path("test").request().get(String.class);
         InputStream responseMsg = target.request().get(InputStream.class);
 //        System.out.println(responseMsg);
-       
-        String uploadedFileLocation = "upload"+ File.separatorChar + name;
+        String uploadedFileLocation="";
+//       if(i==0)
+//        uploadedFileLocation = "upload"+ File.separatorChar + name+"."+datatype;
+//       else
+//    	   uploadedFileLocation = "upload"+ File.separatorChar + name+"("+i+")."+datatype; 
+        uploadedFileLocation = "upload"+ File.separatorChar + name;
    	 
 		// save it
 		writeToFile(responseMsg, uploadedFileLocation);
 		
-		FileReader2 fileReader = new FileReader2("upload"+ File.separatorChar + name);
+		if(name.contains("sav")){
+			
+		FileReader2 fileReader = new FileReader2(uploadedFileLocation);
 		ArrayList<String> t = fileReader.readSPSSCreat();
 		SpssService s = new SpssService();
 		boolean flag = false;
@@ -56,11 +57,12 @@ public class DataverseService {
 			flag=s.create(t);
 			 s.add(fileReader);
 		} catch (Exception e) {
+			System.out.println(e);
 			// TODO Auto-generated catch block
 			return false;
 		}
 		
-		
+		}
         return true;
 	}
 	
@@ -127,8 +129,48 @@ public class DataverseService {
 		return id;
 		
 	}
+
+//public ArrayList<Integer> dataverseByNameRevise(String file_name, String dataverseName) {
+//		
+//		//Sent rest api by file_name = trees
+//		
+//		//binary inputstream -> save to upload
+//		
+//		Client c = ClientBuilder.newClient();
+//		
+//		String url = "https://apitest.dataverse.org/api/search?q=" + file_name + "&subtree=" + dataverseName + "&key=" + dataverseKey;
+//		
+//        WebTarget target = c.target(UriBuilder.fromUri(url).build());
+////        String responseMsg = target.path("rest").path("test").request().get(String.class);
+//        String responseMsg = target.request().get(String.class);
+//        System.out.println(responseMsg);
+//       JSONObject json;
+//       ArrayList<Integer> id=new ArrayList<Integer>();
+//	try {
+//		json = new JSONObject(responseMsg);
+//	       JSONObject data = json.getJSONObject("data");
+//	       JSONArray item = data.getJSONArray("items");
+//	       System.out.println("________________"+item.length());
+//	       for(int i=0; i<item.length();i++){
+//	    	   org.json.JSONObject file = item.getJSONObject(i);
+//	        if( file.has("file_id")){
+//	        	id.add(Integer.parseInt(file.getString("file_id")));
+//	        }
+//	       }
+//	       
+//	} catch (JSONException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+//       
+//
+//    //   org.json.JSONObject id = new org.json.JSONObject(line);
+//
+//		return id;
+//		
+//	}
 	
-public int dataverseByNameRevise(String file_name, String dataverseName) {
+public ArrayList<String> dataverseByNameRevise(String file_name, String dataverseName, String datasetName) {
 		
 		//Sent rest api by file_name = trees
 		
@@ -141,19 +183,23 @@ public int dataverseByNameRevise(String file_name, String dataverseName) {
         WebTarget target = c.target(UriBuilder.fromUri(url).build());
 //        String responseMsg = target.path("rest").path("test").request().get(String.class);
         String responseMsg = target.request().get(String.class);
+        System.out.println(responseMsg);
        JSONObject json;
-       int id = 0;
+       ArrayList<String> filesArray=new ArrayList<String>();
 	try {
-		json = new JSONObject(responseMsg);
+		   json = new JSONObject(responseMsg);
 	       JSONObject data = json.getJSONObject("data");
 	       JSONArray item = data.getJSONArray("items");
-//	       String line = "";
 	       for(int i=0; i<item.length();i++){
 	    	   org.json.JSONObject file = item.getJSONObject(i);
-	        if( file.has("file_id")){
-	  //      	line = "{\"file_id\": \"" + file.getString("file_id") + "\"}";
-	        	id = Integer.parseInt(file.getString("file_id"));
-	        }
+	    	   if(!(datasetName.equals(""))&&file.getString("dataset_citation").contains(datasetName)){
+	    	   filesArray.add(file.toString());
+	    	   System.out.println(file.toString());
+	    	   }
+	    	   else if(datasetName.equals("")){
+	    		   filesArray.add(file.toString());
+		    	   System.out.println(file.toString()); 
+	    	   }
 	       }
 	       
 	} catch (JSONException e) {
@@ -164,9 +210,10 @@ public int dataverseByNameRevise(String file_name, String dataverseName) {
 
     //   org.json.JSONObject id = new org.json.JSONObject(line);
 
-		return id;
+		return filesArray;
 		
 	}
 
-	
+
+
 }
