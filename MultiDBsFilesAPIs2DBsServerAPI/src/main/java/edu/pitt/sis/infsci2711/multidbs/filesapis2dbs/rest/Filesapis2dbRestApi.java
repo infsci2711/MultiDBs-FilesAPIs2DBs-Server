@@ -21,13 +21,14 @@ import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
+import com.google.gson.Gson;
+
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.DataverseService;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.business.SpssService;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.utils.FileReader2;
 import edu.pitt.sis.infsci2711.multidbs.filesapis2dbs.viewModels.DatasourceViewModel;
 import edu.pitt.sis.infsci2711.multidbs.utils.JerseyClientUtil;
 import edu.pitt.sis.infsci2711.multidbs.utils.PropertiesManager;
-
 
 @Path("Filesapis2db/")
 public class Filesapis2dbRestApi {
@@ -60,13 +61,6 @@ public class Filesapis2dbRestApi {
 		DataverseService dataverSerivce = new DataverseService();
 		int spss_id = dataverSerivce.dataverseByName(name);
 		try {
-			result = dataverSerivce.dataverseById(spss_id, name + ".sav");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
 			DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
 					PropertiesManager.getInstance().getStringProperty("ip"), 
 					PropertiesManager.getInstance().getIntProperty("database"), 
@@ -92,49 +86,129 @@ public class Filesapis2dbRestApi {
 		}
 	}
 
+	
+//	@Path("DataverseName/{name}/{datatype}/{dataverseName}")
+//	@POST
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response dataverseDownloadRevise(@PathParam("name") final String name,@PathParam("datatype") final String datatype, @PathParam("dataverseName") final String dataverseName){
+//		boolean result = false;
+//		DataverseService dataverSerivce = new DataverseService();
+//		ArrayList< String> filesArray=new ArrayList<String>();
+//		filesArray = dataverSerivce.dataverseByNameRevise(name, dataverseName);
+//		try {
+//			//result = dataverSerivce.dataverseById(spss_id, name + ".sav");
+//			for(int i=0;i<filesArray.size();i++){
+//			result=true;
+//			//result = dataverSerivce.dataverseById((int)filesArray.get(i), name,datatype,i);
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		try {
+//			if(datatype.equals("sav")){
+////			DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
+////					PropertiesManager.getInstance().getStringProperty("ip"), 
+////					PropertiesManager.getInstance().getIntProperty("database"), 
+////					"dataverse", "dataverse", name.toLowerCase(), name.toLowerCase(), name.toLowerCase());
+//			
+//				DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
+//						PropertiesManager.getInstance().getStringProperty("ip"), 
+//						3306, 
+//						"dataverse", "dataverse", name.toLowerCase(), name.toLowerCase(), name.toLowerCase());
+//				
+//				
+//				logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
+//					datasourceViewModel.getIpAddress(), datasourceViewModel.getPort(),
+//					datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
+//					datasourceViewModel.getDbName()));
+//			
+//			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
+//					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
+//		
+//			}
+//		}
+//			
+//		catch (Exception e) {
+//			logger.error("Request to metastore failed:", e);
+//		}
+		
+//		if(result == true){
+//			return Response.status(200).entity("{\"msg\" : \"Download Success\"}").build();
+//		}else{
+//			return Response.status(200).entity("{\"msg\" : \"Download Fail\"}").build();
+//		}
+		
+//		return Response.ok(filesArray).build();
+//	}
 	
 	@Path("DataverseName/{name}/{dataverseName}")
 	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response dataverseDownloadRevise(@PathParam("name") final String name, @PathParam("dataverseName") final String dataverseName){
+	@Produces(MediaType.TEXT_PLAIN)
+	public  Response dataverseFilesRevise(@PathParam("name") final String name, @PathParam("dataverseName") final String dataverseName){
 		boolean result = false;
+		
 		DataverseService dataverSerivce = new DataverseService();
-		int spss_id = dataverSerivce.dataverseByNameRevise(name, dataverseName);
-//		int spss_id = Integer.parseInt(name);
-		try {
-			result = dataverSerivce.dataverseById(spss_id, name + ".sav");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		ArrayList< String> filesArray=new ArrayList<String>();
+		filesArray = dataverSerivce.dataverseByNameRevise(name, dataverseName,"");
+		 String[] s=new String[filesArray.size()];
+		 for(int i=0;i<filesArray.size();i++){
+			 s[i]=filesArray.get(i);
+		 }
+		// GenericEntity<ArrayList<String>> list = new GenericEntity<ArrayList<String>>(filesArray) {};
+	//	System.out.println(s.toString());
+		 
+		 Gson gson = new Gson();
+		 String json = gson.toJson(filesArray);
+		 
+		 return Response.status(200).entity(json).build();
+		// return Response.status(200).entity(list).build();
+		}
+	
+	
+	@Path("DataverseName/{name}/{dataverseName}/{datasetName}")
+	@POST
+	@Produces(MediaType.TEXT_PLAIN)
+	public  Response dataverseFilesRevise(@PathParam("name") final String name,@PathParam("datasetName") final String datasetName, @PathParam("dataverseName") final String dataverseName){
+		boolean result = false;
+		
+		DataverseService dataverSerivce = new DataverseService();
+		ArrayList< String> filesArray=new ArrayList<String>();
+		filesArray = dataverSerivce.dataverseByNameRevise(name, dataverseName,datasetName);
+		 String[] s=new String[filesArray.size()];
+		 for(int i=0;i<filesArray.size();i++){
+			 s[i]=filesArray.get(i);
+		 }
+		// GenericEntity<ArrayList<String>> list = new GenericEntity<ArrayList<String>>(filesArray) {};
+	//	System.out.println(s.toString());
+		 
+		 Gson gson = new Gson();
+		 String json = gson.toJson(filesArray);
+		 
+		 return Response.status(200).entity(json).build();
+		// return Response.status(200).entity(list).build();
 		}
 		
-		try {
-			DatasourceViewModel datasourceViewModel = new DatasourceViewModel("MySQL", 
-					PropertiesManager.getInstance().getStringProperty("ip"), 
-					PropertiesManager.getInstance().getIntProperty("database"), 
-					"dataverse", "dataverse", name.toLowerCase(), name.toLowerCase(), name.toLowerCase());
-			
-			logger.info(String.format("IP: %s, Port: %s, DBType: %s, Username: %s, Password: %s, DBName: %s", 
-					datasourceViewModel.getIpAddress(), datasourceViewModel.getPort(),
-					datasourceViewModel.getDbType(),datasourceViewModel.getUsername(), datasourceViewModel.getPassword(),
-					datasourceViewModel.getDbName()));
-			
-			Response result2 = JerseyClientUtil.doPut(PropertiesManager.getInstance().getStringProperty("metastore.rest.base"), 
-					PropertiesManager.getInstance().getStringProperty("metastore.rest.addDatasource"), datasourceViewModel);
-		}
-		catch (Exception e) {
-			logger.error("Request to metastore failed:", e);
-		}
-		
+	@Path("DownLoad/{ids}/{name}")
+	@POST
+	@Produces(MediaType.TEXT_PLAIN)
+	public  Response dataverseDownloadRevise(@PathParam("name") final String name,@PathParam("ids") final String ids) throws IOException{
+		boolean result=false;
+		int id=Integer.parseInt(ids);
+		System.out.println(id);
+		DataverseService dataverSerivce = new DataverseService();
+		result = dataverSerivce.dataverseById(id, name);
 		if(result == true){
 			return Response.status(200).entity("{\"msg\" : \"Download Success\"}").build();
 		}else{
 			return Response.status(200).entity("{\"msg\" : \"Download Fail\"}").build();
 		}
-	}
-
 	
-
+	}
+	
+	
+	
 	@Path("SPSSUpload")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -145,7 +219,7 @@ public class Filesapis2dbRestApi {
 			logger.info("In SPSSUpload");
 		
 			String output = "";
-			
+
 			try {
 			
 				String uploadedFileLocation = "upload"+ File.separatorChar + fileDetail.getFileName();
